@@ -1,0 +1,960 @@
+<title>Chen Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+
+<style>
+:root {
+  --bg: #07080F;
+  --surf: #0C0E1A;
+  --card: #111320;
+  --border: #1C1F35;
+  --cyan: #00D4FF;
+  --purple: #9B59FF;
+  --green: #00FF88;
+  --orange: #FF8800;
+  --text: #E2E8F8;
+  --text-dim: #8892B0;
+  --text-muted: #3D4566;
+  --neon: #AAFF00;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(0,212,255,0.07) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── HEADER ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(7,8,15,0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-mark {
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #00D4FF, #0088AA);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 15px;
+  color: #07080F;
+  box-shadow: 0 0 18px rgba(0,212,255,0.45);
+  flex-shrink: 0;
+}
+.logo-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+.logo-text em { color: var(--cyan); font-style: normal; }
+
+/* ── LANG TOGGLE ── */
+.lang-toggle {
+  margin-left: auto;
+  display: flex;
+  gap: 2px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+}
+.lang-btn {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 5px 13px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  background: transparent;
+  color: var(--text-muted);
+}
+.lang-btn.active {
+  background: var(--cyan);
+  color: #07080F;
+  box-shadow: 0 0 10px rgba(0,212,255,0.35);
+}
+.lang-btn:not(.active):hover {
+  color: var(--text-dim);
+  background: rgba(255,255,255,0.06);
+}
+
+/* ── WRAP ── */
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px 100px;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 72px 0 56px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.hero-left {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(26px, 4vw, 50px);
+  font-weight: 900;
+  line-height: 1.18;
+  margin-bottom: 22px;
+  text-wrap: balance;
+}
+.hero-title .glow {
+  color: var(--cyan);
+  text-shadow: 0 0 24px rgba(0,212,255,0.55), 0 0 64px rgba(0,212,255,0.2);
+}
+.hero-desc {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.85;
+  max-width: 540px;
+  margin: 0 auto 48px;
+}
+.hero-stats { display: flex; justify-content: center; }
+.hero-stat { padding: 0 36px; text-align: center; position: relative; }
+.hero-stat + .hero-stat::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  height: 32px; width: 1px;
+  background: var(--border);
+}
+.hero-stat .num {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-shadow: 0 0 20px rgba(0,212,255,0.4);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.hero-stat .lbl { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; }
+
+/* ── UPCOMING PANEL ── */
+.upcoming-panel {
+  width: 300px;
+  flex-shrink: 0;
+  background: rgba(170,255,0,0.035);
+  border: 1px solid rgba(170,255,0,0.22);
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 0 40px rgba(170,255,0,0.05) inset, 0 0 60px rgba(170,255,0,0.04);
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+.up-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--neon);
+  text-transform: uppercase;
+  text-shadow: 0 0 14px rgba(170,255,0,0.55);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.5;
+}
+.up-title::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--neon);
+  box-shadow: 0 0 10px var(--neon), 0 0 20px rgba(170,255,0,0.4);
+  animation: blink 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.up-list { display: flex; flex-direction: column; gap: 16px; flex: 1; justify-content: center; }
+.up-item {}
+.up-name {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.up-badge {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(170,255,0,0.1);
+  color: var(--neon);
+  border: 1px solid rgba(170,255,0,0.28);
+  white-space: nowrap;
+  margin-top: 1px;
+}
+.up-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.up-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.up-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(170,255,0,0.55), var(--neon));
+  box-shadow: 0 0 8px rgba(170,255,0,0.5);
+}
+.up-pct {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--neon);
+  width: 30px;
+  text-align: right;
+  flex-shrink: 0;
+  text-shadow: 0 0 8px rgba(170,255,0,0.4);
+}
+
+/* ── SECTION DIVIDER ── */
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 56px 0 24px;
+}
+.sec-head::before, .sec-head::after { content: ''; flex: 1; height: 1px; }
+.sec-head.c-cyan::before,   .sec-head.c-cyan::after   { background: linear-gradient(90deg,transparent,rgba(0,212,255,0.35),transparent); }
+.sec-head.c-purple::before, .sec-head.c-purple::after { background: linear-gradient(90deg,transparent,rgba(155,89,255,0.35),transparent); }
+.sec-head.c-green::before,  .sec-head.c-green::after  { background: linear-gradient(90deg,transparent,rgba(0,255,136,0.35),transparent); }
+.sec-head.c-orange::before, .sec-head.c-orange::after { background: linear-gradient(90deg,transparent,rgba(255,136,0,0.35),transparent); }
+
+.sec-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  white-space: nowrap;
+  padding: 6px 18px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+.sec-label.c-cyan   { color:var(--cyan);   background:rgba(0,212,255,0.09);  border:1px solid rgba(0,212,255,0.28); }
+.sec-label.c-purple { color:var(--purple); background:rgba(155,89,255,0.09); border:1px solid rgba(155,89,255,0.28); }
+.sec-label.c-green  { color:var(--green);  background:rgba(0,255,136,0.09);  border:1px solid rgba(0,255,136,0.28); }
+.sec-label.c-orange { color:var(--orange); background:rgba(255,136,0,0.09);  border:1px solid rgba(255,136,0,0.28); }
+
+/* ── GRID ── */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 18px; }
+
+/* ── CARD ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.card:hover { transform: translateY(-5px); }
+.card.c-cyan:hover   { box-shadow:0 10px 40px rgba(0,212,255,0.14);  border-color:rgba(0,212,255,0.45); }
+.card.c-purple:hover { box-shadow:0 10px 40px rgba(155,89,255,0.14); border-color:rgba(155,89,255,0.45); }
+.card.c-green:hover  { box-shadow:0 10px 40px rgba(0,255,136,0.14);  border-color:rgba(0,255,136,0.45); }
+.card.c-orange:hover { box-shadow:0 10px 40px rgba(255,136,0,0.14);  border-color:rgba(255,136,0,0.45); }
+
+.card-bar { height: 3px; }
+.card.c-cyan   .card-bar { background:linear-gradient(90deg,var(--cyan),#005577); }
+.card.c-purple .card-bar { background:linear-gradient(90deg,var(--purple),#44009F); }
+.card.c-green  .card-bar { background:linear-gradient(90deg,var(--green),#008844); }
+.card.c-orange .card-bar { background:linear-gradient(90deg,var(--orange),#884400); }
+
+.card-body { padding: 22px 22px 20px; flex: 1; display: flex; flex-direction: column; }
+.card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+.card-icon {
+  width: 46px; height: 46px;
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.card.c-cyan   .card-icon { background:rgba(0,212,255,0.1); }
+.card.c-purple .card-icon { background:rgba(155,89,255,0.1); }
+.card.c-green  .card-icon { background:rgba(0,255,136,0.1); }
+.card.c-orange .card-icon { background:rgba(255,136,0,0.1); }
+
+.card-meta-top { flex: 1; }
+.card-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.card-ver { font-family:'Orbitron',sans-serif; font-size:10px; color:var(--text-muted); letter-spacing:0.06em; }
+.card-desc { font-size:13px; line-height:1.75; color:var(--text-dim); flex:1; margin-bottom:18px; }
+.card-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.tag { font-family:'Orbitron',sans-serif; font-size:9.5px; letter-spacing:0.05em; padding:3px 9px; border-radius:5px; }
+.tag-os   { background:rgba(255,255,255,0.04); color:var(--text-muted); border:1px solid var(--border); }
+.tag-size { background:rgba(255,255,255,0.04); color:var(--text-muted); border:1px solid var(--border); }
+.tag-free { background:rgba(0,255,136,0.09);   color:var(--green);  border:1px solid rgba(0,255,136,0.25); }
+.tag-pro  { background:rgba(155,89,255,0.09);  color:var(--purple); border:1px solid rgba(155,89,255,0.25); }
+.tag-life { background:rgba(0,212,255,0.09);   color:var(--cyan);   border:1px solid rgba(0,212,255,0.25); }
+
+.btn-dl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 9px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+}
+.card.c-cyan   .btn-dl { background:linear-gradient(135deg,rgba(0,212,255,0.14),rgba(0,212,255,0.07)); border:1px solid rgba(0,212,255,0.38); color:var(--cyan); }
+.card.c-cyan   .btn-dl:hover { background:linear-gradient(135deg,rgba(0,212,255,0.24),rgba(0,212,255,0.14)); box-shadow:0 0 22px rgba(0,212,255,0.22); }
+.card.c-purple .btn-dl { background:linear-gradient(135deg,rgba(155,89,255,0.14),rgba(155,89,255,0.07)); border:1px solid rgba(155,89,255,0.38); color:var(--purple); }
+.card.c-purple .btn-dl:hover { background:linear-gradient(135deg,rgba(155,89,255,0.24),rgba(155,89,255,0.14)); box-shadow:0 0 22px rgba(155,89,255,0.22); }
+.card.c-green  .btn-dl { background:linear-gradient(135deg,rgba(0,255,136,0.14),rgba(0,255,136,0.07)); border:1px solid rgba(0,255,136,0.38); color:var(--green); }
+.card.c-green  .btn-dl:hover { background:linear-gradient(135deg,rgba(0,255,136,0.24),rgba(0,255,136,0.14)); box-shadow:0 0 22px rgba(0,255,136,0.22); }
+.card.c-orange .btn-dl { background:linear-gradient(135deg,rgba(255,136,0,0.14),rgba(255,136,0,0.07)); border:1px solid rgba(255,136,0,0.38); color:var(--orange); }
+.card.c-orange .btn-dl:hover { background:linear-gradient(135deg,rgba(255,136,0,0.24),rgba(255,136,0,0.14)); box-shadow:0 0 22px rgba(255,136,0,0.22); }
+
+/* ── CONTACT SECTION ── */
+.contact-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 64px;
+}
+.contact-card {
+  position: relative;
+  border-radius: 16px;
+  padding: 30px 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.contact-card.c-inquiry {
+  background: rgba(0,212,255,0.04);
+  border: 1px solid rgba(0,212,255,0.3);
+  box-shadow: 0 0 32px rgba(0,212,255,0.06) inset, 0 0 20px rgba(0,212,255,0.05);
+}
+.contact-card.c-learn {
+  background: rgba(155,89,255,0.05);
+  border: 1px solid rgba(155,89,255,0.4);
+  box-shadow: 0 0 32px rgba(155,89,255,0.08) inset, 0 0 20px rgba(155,89,255,0.06);
+  animation: learnpulse 3s ease-in-out infinite;
+}
+@keyframes learnpulse {
+  0%,100% { box-shadow: 0 0 32px rgba(155,89,255,0.08) inset, 0 0 20px rgba(155,89,255,0.06); border-color: rgba(155,89,255,0.4); }
+  50%      { box-shadow: 0 0 40px rgba(155,89,255,0.16) inset, 0 0 36px rgba(155,89,255,0.15); border-color: rgba(155,89,255,0.7); }
+}
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+.contact-card.c-inquiry::before { background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+.contact-card.c-learn::before   { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+
+.cc-icon { font-size: 28px; line-height: 1; }
+.cc-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+.contact-card.c-inquiry .cc-title { color: var(--cyan); }
+.contact-card.c-learn   .cc-title { color: var(--purple); }
+.cc-desc { font-size: 15px; line-height: 1.8; color: var(--text-dim); flex: 1; }
+.cc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.cc-tag {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+.contact-card.c-inquiry .cc-tag { background: rgba(0,212,255,0.08); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+.contact-card.c-learn   .cc-tag { background: rgba(155,89,255,0.08); color: var(--purple); border: 1px solid rgba(155,89,255,0.2); }
+
+.btn-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 20px;
+  border-radius: 9px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: all 0.22s ease;
+  align-self: flex-start;
+}
+.contact-card.c-inquiry .btn-email {
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.4);
+  color: var(--cyan);
+}
+.contact-card.c-inquiry .btn-email:hover {
+  background: rgba(0,212,255,0.18);
+  box-shadow: 0 0 22px rgba(0,212,255,0.28);
+  border-color: var(--cyan);
+}
+.contact-card.c-learn .btn-email {
+  background: rgba(155,89,255,0.12);
+  border: 1px solid rgba(155,89,255,0.45);
+  color: var(--purple);
+}
+.contact-card.c-learn .btn-email:hover {
+  background: rgba(155,89,255,0.22);
+  box-shadow: 0 0 22px rgba(155,89,255,0.3);
+  border-color: var(--purple);
+}
+.btn-email svg { opacity: 0.85; }
+
+@media (max-width:720px) {
+  .contact-section { grid-template-columns: 1fr; }
+}
+
+/* ── FOOTER ── */
+footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; border-top:1px solid var(--border); text-align:center; }
+.footer-logo { font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.1em; color:var(--cyan); margin-bottom:10px; text-shadow:0 0 14px rgba(0,212,255,0.4); }
+.footer-note { font-size:11.5px; color:var(--text-muted); line-height:1.8; }
+
+@media (max-width:960px) {
+  .hero { flex-direction: column; }
+  .upcoming-panel { width: 100%; max-width: 560px; }
+}
+@media (max-width:720px) {
+  .grid { grid-template-columns:1fr; }
+  .hero-stat { padding:0 18px; }
+  .hero-stat .num { font-size:20px; }
+  .wrap { padding:0 16px 80px; }
+  .header-inner { padding:0 16px; }
+}
+</style>
+
+<svg style="display:none">
+  <symbol id="ico-dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </symbol>
+</svg>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-mark">C</div>
+    <span class="logo-text">CHEN<em>PROJECT</em></span>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="ko" onclick="setLang('ko')">KO</button>
+      <button class="lang-btn"        data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+
+    <div class="hero-left">
+      <p class="hero-eyebrow" data-i18n="eyebrow">9 SOFTWARE AVAILABLE NOW</p>
+      <h1 class="hero-title">
+        <span data-i18n="title1">AI 자동화 소프트웨어</span><br>
+        <span class="glow" data-i18n="title2">다운로드 센터</span>
+      </h1>
+      <p class="hero-desc" data-i18n="desc">크리에이터·마케터를 위한 AI 기반 자동화 도구 모음.<br>반복 작업을 자동화하고 수익화에 집중하세요.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">9</span><span class="lbl" data-i18n="stat1">프로그램</span></div>
+        <div class="hero-stat"><span class="num">AI</span><span class="lbl" data-i18n="stat2">Gemini 기반</span></div>
+        <div class="hero-stat"><span class="num">WIN</span><span class="lbl" data-i18n="stat3">Windows 전용</span></div>
+      </div>
+    </div>
+
+    <div class="upcoming-panel">
+      <div class="up-title" data-i18n="up_title">배포 예정 개발 프로그램</div>
+      <div class="up-list">
+        <div class="up-item">
+          <div class="up-name"><span data-i18n="up1">자동 이미지 생성 프로그램</span> <span class="up-badge" data-i18n="up1_badge">오프라인 무료</span></div>
+          <div class="up-bar-row">
+            <div class="up-bar"><div class="up-fill" style="width:90%"></div></div>
+            <span class="up-pct">90%</span>
+          </div>
+        </div>
+        <div class="up-item">
+          <div class="up-name"><span data-i18n="up2">쇼핑 쇼츠 자동화 생성 프로그램</span></div>
+          <div class="up-bar-row">
+            <div class="up-bar"><div class="up-fill" style="width:80%"></div></div>
+            <span class="up-pct">80%</span>
+          </div>
+        </div>
+        <div class="up-item">
+          <div class="up-name"><span data-i18n="up3">워드프레스 블로그 자동화</span> <span class="up-badge" data-i18n="up3_badge">커스터마이징</span></div>
+          <div class="up-bar-row">
+            <div class="up-bar"><div class="up-fill" style="width:99%"></div></div>
+            <span class="up-pct">99%</span>
+          </div>
+        </div>
+        <div class="up-item">
+          <div class="up-name"><span data-i18n="up4">네이버 블로그 자동화</span></div>
+          <div class="up-bar-row">
+            <div class="up-bar"><div class="up-fill" style="width:80%"></div></div>
+            <span class="up-pct">80%</span>
+          </div>
+        </div>
+        <div class="up-item">
+          <div class="up-name"><span data-i18n="up5">유튜브 롱폼 자동화</span></div>
+          <div class="up-bar-row">
+            <div class="up-bar"><div class="up-fill" style="width:50%"></div></div>
+            <span class="up-pct">50%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── AI 블로그 & 마케팅 ── -->
+  <div class="sec-head c-cyan"><span class="sec-label c-cyan" data-i18n="cat1">AI 블로그 &amp; 마케팅</span></div>
+  <div class="grid">
+
+    <div class="card c-cyan">
+      <div class="card-bar"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-icon">🛍️</div>
+          <div class="card-meta-top">
+            <div class="card-name">AUTO CHEN PRO</div>
+            <div class="card-ver">v2.7.life</div>
+          </div>
+        </div>
+        <p class="card-desc" data-i18n="d_achen">쿠팡파트너스 AI 블로그 자동화 솔루션. 상품 수집부터 AI 글 생성, 이미지 처리, 워드프레스 자동 업로드까지 원클릭으로 처리합니다.</p>
+        <div class="card-tags">
+          <span class="tag tag-os">Windows</span>
+          <span class="tag tag-size">75.3 MB</span>
+          <span class="tag tag-free">FREE</span>
+        </div>
+        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/AUTO_CHEN_PRO_life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+      </div>
+    </div>
+
+    <div class="card c-cyan">
+      <div class="card-bar"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-icon">🌐</div>
+          <div class="card-meta-top">
+            <div class="card-name">ALIX PRO</div>
+            <div class="card-ver">v2.0.life</div>
+          </div>
+        </div>
+        <p class="card-desc" data-i18n="d_alix">AliExpress 상품을 자동으로 분석하여 워드프레스에 AI 블로그 글을 게시합니다. 영어권 글로벌 수익화에 최적화된 도구입니다.</p>
+        <div class="card-tags">
+          <span class="tag tag-os">Windows</span>
+          <span class="tag tag-size">89.8 MB</span>
+          <span class="tag tag-free">FREE</span>
+        </div>
+        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/ALIX_PRO_life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+      </div>
+    </div>
+
+    <div class="card c-cyan">
+      <div class="card-bar"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-icon">📋</div>
+          <div class="card-meta-top">
+            <div class="card-name">BlogCloner</div>
+            <div class="card-ver">v1.0.life</div>
+          </div>
+        </div>
+        <p class="card-desc" data-i18n="d_blogcloner">네이버 블로그 URL을 입력하면 구조를 분석하고, Gemini AI로 새 글을 자동 생성합니다. 블로그 운영 시간을 획기적으로 단축하세요.</p>
+        <div class="card-tags">
+          <span class="tag tag-os">Windows</span>
+          <span class="tag tag-size">90.4 MB</span>
+          <span class="tag tag-free">FREE</span>
+        </div>
+        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/BlogCloner_v1.0.life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 유튜브 & 크리에이터 ── -->
+  <div class="sec-head c-purple"><span class="sec-label c-purple" data-i18n="cat2">유튜브 &amp; 크리에이터</span></div>
+  <div class="grid">
+
+    <div class="card c-purple">
+      <div class="card-bar"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-icon">⬇️</div>
+          <div class="card-meta-top">
+            <div class="card-name">YouTube Downloader</div>
+            <div class="card-ver">v1.5.0</div>
+          </div>
+        </div>
+        <p class="card-desc" data-i18n="d_ytdl">YouTube 영상·음악을 MP4/MP3로 고속 다운로드. 재생목록 일괄 다운로드, 자막 추출, 화질 선택까지 지원합니다. 라이선스 키 필요.</p>
+        <div class="card-tags">
+          <span class="tag tag-os">Windows</span>
+          <span class="tag tag-size">74.7 MB</span>
+          <span class="tag tag-free">FREE</span>
+        </div>
+        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/YT_Downloader_life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+      </div>
+    </div>
+
+    <div class="card c-purple">
+      <div class="card-bar"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-icon">📊</div>
+          <div class="card-meta-top">
+            <div class="card-name">FocusChen PRO</div>
+            <div class="card-ver">v1.1.life</div>
+          </div>
+        </div>
+        <p class="card-desc" data-i18n="d_focus">YouTube 채널·영상을 AI로 심층 분석. CII 바이럴 지수 산출, 대본 자동 생성, MP4/MP3 다운로드. 한 번 구입 후 평생 이용.</p>
+        <div class="card-tags">
+          <span class="tag tag-os">Windows</span>
+          <span class="tag tag-size">131.2 MB</span>
+          <span class="tag tag-free">FREE</span>
+        </div>
+        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/FocusChen_PRO_v1.1.life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+      </div>
+    </div>
+
+    <div class="card c-purple">
+      <div class="card-bar"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-icon">📤</div>
+          <div class="card-meta-top">
+            <div class="card-name">Multi Upload Pro</div>
+            <div class="card-ver">v1.0.0</div>
+          </div>
+        </div>
+        <p class="card-desc" data-i18n="d_multi">YouTube, Instagram, Facebook, TikTok 등 8개 플랫폼에 숏폼 영상을 동시 일괄 업로드. 반복 업로드 시간을 80% 단축합니다.</p>
+        <div class="card-tags">
+          <span class="tag tag-os">Windows</span>
+          <span class="tag tag-size">38.3 MB</span>
+          <span class="tag tag-free">FREE</span>
+        </div>
+        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/MultiUploadPro_life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 녹화 & 오디오 ── -->
+  <div class="sec-head c-green"><span class="sec-label c-green" data-i18n="cat3">녹화 &amp; 오디오</span></div>
+  <div class="grid">
+
+    <div class="card c-green">
+      <div class="card-bar"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-icon">🎬</div>
+          <div class="card-meta-top">
+            <div class="card-name">AUTO CHEN REC</div>
+            <div class="card-ver">v1.1.life</div>
+          </div>
+        </div>
+        <p class="card-desc" data-i18n="d_rec">화면 녹화 + 시스템 오디오 + 마이크를 동시에 고품질로 녹화. 빨간 테두리 표시, 카운트다운 시작, 단축키 제어를 지원합니다.</p>
+        <div class="card-tags">
+          <span class="tag tag-os">Windows</span>
+          <span class="tag tag-size">77.6 MB</span>
+          <span class="tag tag-free">FREE</span>
+        </div>
+        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/AUTO_CHEN_REC_v1.1.life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+      </div>
+    </div>
+
+    <div class="card c-green">
+      <div class="card-bar"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-icon">🎙️</div>
+          <div class="card-meta-top">
+            <div class="card-name">ChenRecorder</div>
+            <div class="card-ver">v1.2.life</div>
+          </div>
+        </div>
+        <p class="card-desc" data-i18n="d_chenrec">WASAPI Loopback 기술로 시스템 오디오를 무손실 녹음. 마이크 믹스, 카운트다운, 폴더 관리까지 갖춘 경량 전문가용 오디오 레코더.</p>
+        <div class="card-tags">
+          <span class="tag tag-os">Windows</span>
+          <span class="tag tag-size">64.8 MB</span>
+          <span class="tag tag-free">FREE</span>
+        </div>
+        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/ChenRecorder_v1.2.life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 유틸리티 & 보안 ── -->
+  <div class="sec-head c-orange"><span class="sec-label c-orange" data-i18n="cat4">유틸리티 &amp; 보안</span></div>
+  <div class="grid">
+
+    <div class="card c-orange">
+      <div class="card-bar"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-icon">🗜️</div>
+          <div class="card-meta-top">
+            <div class="card-name">ChenZip</div>
+            <div class="card-ver">v1.1.1</div>
+          </div>
+        </div>
+        <p class="card-desc" data-i18n="d_chenzip">전문가용 파일 압축·비밀번호 복구 도구. GPU(Hashcat) 엔진을 탑재해 ZIP·RAR·7z 암호를 초고속으로 분석하며, 포렌식 완전탐색까지 지원합니다.</p>
+        <div class="card-tags">
+          <span class="tag tag-os">Windows</span>
+          <span class="tag tag-size">69.7 MB</span>
+          <span class="tag tag-free">FREE</span>
+        </div>
+        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/ChenZip_v1.1.1_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 문의하기 ── -->
+  <div class="contact-section">
+
+    <div class="contact-card c-inquiry">
+      <div class="cc-icon">📬</div>
+      <div class="cc-title" data-i18n="inq_title">버그 신고 · 프로그램 문의</div>
+      <p class="cc-desc" data-i18n="inq_desc">프로그램 사용 중 오류가 발생하거나 기능 관련 문의사항이 있으시면 이메일로 연락해 주세요. 최대한 빠르게 답변드리겠습니다.</p>
+      <div class="cc-tags">
+        <span class="cc-tag">BUG REPORT</span>
+        <span class="cc-tag">FEATURE REQUEST</span>
+        <span class="cc-tag">LICENSE</span>
+      </div>
+      <a href="mailto:lch7654@nate.com" class="btn-email">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        lch7654@nate.com
+      </a>
+    </div>
+
+    <div class="contact-card c-learn">
+      <div class="cc-icon">🛠️</div>
+      <div class="cc-title" data-i18n="learn_title">이런 프로그램, 직접 만들고 싶다면?</div>
+      <p class="cc-desc" data-i18n="learn_desc">PyQt6 GUI 개발 · Gemini AI API 연동 · 윈도우 자동화 · PyInstaller 빌드 · Inno Setup 배포까지. 이 프로그램들의 제작 과정을 배우고 싶으신 분은 편하게 연락해 주세요.</p>
+      <div class="cc-tags">
+        <span class="cc-tag">PyQt6</span>
+        <span class="cc-tag">GEMINI AI</span>
+        <span class="cc-tag">AUTOMATION</span>
+        <span class="cc-tag">BUILD &amp; DEPLOY</span>
+      </div>
+      <a href="mailto:lch7654@nate.com" class="btn-email">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        lch7654@nate.com
+      </a>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">CHEN PROJECT</div>
+  <p class="footer-note" data-i18n="footer">Windows 10 / 11 (64-bit) 전용 소프트웨어입니다.</p>
+</footer>
+
+<script>
+const T = {
+  ko: {
+    eyebrow:      '9개 소프트웨어 공개 중',
+    title1:       'AI 자동화 소프트웨어',
+    title2:       '다운로드 센터',
+    desc:         '크리에이터·마케터를 위한 AI 기반 자동화 도구 모음.\n반복 작업을 자동화하고 수익화에 집중하세요.',
+    stat1:        '프로그램',
+    stat2:        'Gemini 기반',
+    stat3:        'Windows 전용',
+    cat1:         'AI 블로그 & 마케팅',
+    cat2:         '유튜브 & 크리에이터',
+    cat3:         '녹화 & 오디오',
+    cat4:         '유틸리티 & 보안',
+    dl:           '다운로드',
+    d_achen:      '쿠팡파트너스 AI 블로그 자동화 솔루션. 상품 수집부터 AI 글 생성, 이미지 처리, 워드프레스 자동 업로드까지 원클릭으로 처리합니다.',
+    d_alix:       'AliExpress 상품을 자동으로 분석하여 워드프레스에 AI 블로그 글을 게시합니다. 영어권 글로벌 수익화에 최적화된 도구입니다.',
+    d_blogcloner: '네이버 블로그 URL을 입력하면 구조를 분석하고, Gemini AI로 새 글을 자동 생성합니다. 블로그 운영 시간을 획기적으로 단축하세요.',
+    d_ytdl:       'YouTube 영상·음악을 MP4/MP3로 고속 다운로드. 재생목록 일괄 다운로드, 자막 추출, 화질 선택까지 지원합니다. 라이선스 키 필요.',
+    d_focus:      'YouTube 채널·영상을 AI로 심층 분석. CII 바이럴 지수 산출, 대본 자동 생성, MP4/MP3 다운로드. 한 번 구입 후 평생 이용.',
+    d_multi:      'YouTube, Instagram, Facebook, TikTok 등 8개 플랫폼에 숏폼 영상을 동시 일괄 업로드. 반복 업로드 시간을 80% 단축합니다.',
+    d_rec:        '화면 녹화 + 시스템 오디오 + 마이크를 동시에 고품질로 녹화. 빨간 테두리 표시, 카운트다운 시작, 단축키 제어를 지원합니다.',
+    d_chenrec:    'WASAPI Loopback 기술로 시스템 오디오를 무손실 녹음. 마이크 믹스, 카운트다운, 폴더 관리까지 갖춘 경량 전문가용 오디오 레코더.',
+    d_chenzip:    '전문가용 파일 압축·비밀번호 복구 도구. GPU(Hashcat) 엔진을 탑재해 ZIP·RAR·7z 암호를 초고속으로 분석하며, 포렌식 완전탐색까지 지원합니다.',
+    inq_title:    '버그 신고 · 프로그램 문의',
+    inq_desc:     '프로그램 사용 중 오류가 발생하거나 기능 관련 문의사항이 있으시면 이메일로 연락해 주세요. 최대한 빠르게 답변드리겠습니다.',
+    learn_title:  '이런 프로그램, 직접 만들고 싶다면?',
+    learn_desc:   'PyQt6 GUI 개발 · Gemini AI API 연동 · 윈도우 자동화 · PyInstaller 빌드 · Inno Setup 배포까지. 이 프로그램들의 제작 과정을 배우고 싶으신 분은 편하게 연락해 주세요.',
+    footer:       'Windows 10 / 11 (64-bit) 전용 소프트웨어입니다.',
+    up_title:     '배포 예정 개발 프로그램',
+    up1:          '자동 이미지 생성 프로그램',
+    up1_badge:    '오프라인 무료',
+    up2:          '쇼핑 쇼츠 자동화 생성 프로그램',
+    up3:          '워드프레스 블로그 자동화',
+    up3_badge:    '커스터마이징',
+    up4:          '네이버 블로그 자동화',
+    up5:          '유튜브 롱폼 자동화',
+  },
+  en: {
+    eyebrow:      '9 SOFTWARE AVAILABLE NOW',
+    title1:       'AI Automation Software',
+    title2:       'Download Center',
+    desc:         'A collection of AI-powered automation tools for creators & marketers.\nAutomate repetitive tasks and focus on what matters — monetization.',
+    stat1:        'Programs',
+    stat2:        'Gemini AI',
+    stat3:        'Windows Only',
+    cat1:         'AI Blog & Marketing',
+    cat2:         'YouTube & Creators',
+    cat3:         'Recording & Audio',
+    cat4:         'Utilities & Security',
+    dl:           'Download',
+    d_achen:      'AI blog automation for Coupang Partners. Handles product collection, AI content writing, image processing, and WordPress upload — all in one click.',
+    d_alix:       'Automatically analyzes AliExpress products and publishes AI blog posts to WordPress. Optimized for global English-market monetization.',
+    d_blogcloner: 'Enter a Naver blog URL and it analyzes its structure, then auto-generates new posts with Gemini AI. Cut your blog management time dramatically.',
+    d_ytdl:       'High-speed YouTube video & music download in MP4/MP3. Supports playlist batch download, subtitle extraction, and quality selection. License key required.',
+    d_focus:      'Deep AI analysis of YouTube channels and videos. CII viral index, auto script generation, MP4/MP3 download. Buy once, use forever.',
+    d_multi:      'Simultaneously upload short-form videos to 8 platforms — YouTube, Instagram, Facebook, TikTok, and more. Cut upload time by 80%.',
+    d_rec:        'Simultaneously record screen, system audio, and microphone in high quality. Supports red-border indicator, countdown start, and hotkey control.',
+    d_chenrec:    'Lossless system audio recording with WASAPI Loopback. A lightweight professional audio recorder with mic mix, countdown, and folder management.',
+    d_chenzip:    'Professional file compression & password recovery tool. GPU-accelerated Hashcat engine cracks ZIP, RAR, and 7z passwords at maximum speed, with full forensic brute-force support.',
+    inq_title:    'Bug Report & Program Inquiries',
+    inq_desc:     'If you encounter any bugs or have questions about features, feel free to reach out via email. We\'ll get back to you as soon as possible.',
+    learn_title:  'Want to Build Programs Like These?',
+    learn_desc:   'PyQt6 GUI development · Gemini AI API integration · Windows automation · PyInstaller builds · Inno Setup deployment. If you\'re interested in learning how these programs are made, feel free to reach out.',
+    footer:       'Software designed exclusively for Windows 10 / 11 (64-bit).',
+    up_title:     'UPCOMING PROGRAMS',
+    up1:          'AI Image Generator',
+    up1_badge:    'OFFLINE · FREE',
+    up2:          'Shopping Shorts Automation',
+    up3:          'WordPress Blog Automation',
+    up3_badge:    'CUSTOM',
+    up4:          'Naver Blog Automation',
+    up5:          'YouTube Longform Automation',
+  }
+};
+
+let currentLang = 'ko';
+
+function setLang(lang) {
+  if (lang === currentLang) return;
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (T[lang][key] !== undefined) {
+      if (key === 'desc') {
+        el.innerHTML = T[lang][key].replace(/\n/g, '<br>');
+      } else {
+        el.textContent = T[lang][key];
+      }
+    }
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
+  try { localStorage.setItem('cp_lang', lang); } catch {}
+}
+
+(function() {
+  let saved = 'ko';
+  try { saved = localStorage.getItem('cp_lang') || 'ko'; } catch {}
+  if (saved === 'en') setLang('en');
+})();
+</script>
