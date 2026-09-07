@@ -509,6 +509,123 @@ header {
   .contact-section { grid-template-columns: 1fr; }
 }
 
+/* ── DOWNLOAD MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.78);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-box {
+  background: #0C0E1A;
+  border: 1px solid rgba(0,212,255,0.35);
+  border-radius: 18px;
+  padding: 36px 32px 28px;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: 0 0 60px rgba(0,212,255,0.12), 0 24px 64px rgba(0,0,0,0.6);
+  position: relative;
+}
+.modal-icon { font-size: 34px; margin-bottom: 14px; line-height: 1; }
+.modal-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cyan);
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 16px rgba(0,212,255,0.4);
+}
+.modal-prog {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  letter-spacing: 0.1em;
+}
+.modal-desc {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.85;
+  margin-bottom: 22px;
+}
+.modal-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 26px;
+  background: rgba(0,212,255,0.04);
+  border: 1px solid rgba(0,212,255,0.14);
+  border-radius: 12px;
+  padding: 16px;
+}
+.modal-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+.modal-step + .modal-step {
+  border-top: 1px solid rgba(0,212,255,0.08);
+}
+.step-num {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: rgba(0,212,255,0.12);
+  border: 1px solid rgba(0,212,255,0.38);
+  color: var(--cyan);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-text { font-size: 13.5px; color: var(--text); line-height: 1.5; }
+.step-text em { font-style: normal; color: var(--cyan); font-weight: 700; }
+.modal-btns { display: flex; gap: 10px; }
+.btn-modal-cancel {
+  flex: 1;
+  padding: 12px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-modal-cancel:hover { background: rgba(255,255,255,0.05); color: var(--text-dim); }
+.btn-modal-start {
+  flex: 2;
+  padding: 12px;
+  border-radius: 9px;
+  border: 1px solid rgba(0,212,255,0.5);
+  background: linear-gradient(135deg, rgba(0,212,255,0.18), rgba(0,212,255,0.08));
+  color: var(--cyan);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-modal-start:hover {
+  background: linear-gradient(135deg, rgba(0,212,255,0.28), rgba(0,212,255,0.15));
+  box-shadow: 0 0 22px rgba(0,212,255,0.28);
+}
+
 /* ── FOOTER ── */
 footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; border-top:1px solid var(--border); text-align:center; }
 .footer-logo { font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.1em; color:var(--cyan); margin-bottom:10px; text-shadow:0 0 14px rgba(0,212,255,0.4); }
@@ -627,7 +744,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
           <span class="tag tag-size">75.3 MB</span>
           <span class="tag tag-free">FREE</span>
         </div>
-        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/AUTO_CHEN_PRO_life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+        <button class="btn-dl" onclick="showDownload('https://github.com/lch76543-boop/chen-make/releases/download/v1.0/AUTO_CHEN_PRO_life_Setup.exe','AUTO CHEN PRO')"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></button>
       </div>
     </div>
 
@@ -647,7 +764,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
           <span class="tag tag-size">89.8 MB</span>
           <span class="tag tag-free">FREE</span>
         </div>
-        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/ALIX_PRO_life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+        <button class="btn-dl" onclick="showDownload('https://github.com/lch76543-boop/chen-make/releases/download/v1.0/ALIX_PRO_life_Setup.exe','ALIX PRO')"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></button>
       </div>
     </div>
 
@@ -667,7 +784,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
           <span class="tag tag-size">90.4 MB</span>
           <span class="tag tag-free">FREE</span>
         </div>
-        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/BlogCloner_v1.0.life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+        <button class="btn-dl" onclick="showDownload('https://github.com/lch76543-boop/chen-make/releases/download/v1.0/BlogCloner_v1.0.life_Setup.exe','BlogCloner')"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></button>
       </div>
     </div>
 
@@ -693,7 +810,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
           <span class="tag tag-size">74.7 MB</span>
           <span class="tag tag-free">FREE</span>
         </div>
-        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/YT_Downloader_life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+        <button class="btn-dl" onclick="showDownload('https://github.com/lch76543-boop/chen-make/releases/download/v1.0/YT_Downloader_life_Setup.exe','YouTube Downloader')"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></button>
       </div>
     </div>
 
@@ -713,7 +830,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
           <span class="tag tag-size">131.2 MB</span>
           <span class="tag tag-free">FREE</span>
         </div>
-        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/FocusChen_PRO_v1.1.life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+        <button class="btn-dl" onclick="showDownload('https://github.com/lch76543-boop/chen-make/releases/download/v1.0/FocusChen_PRO_v1.1.life_Setup.exe','FocusChen PRO')"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></button>
       </div>
     </div>
 
@@ -733,7 +850,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
           <span class="tag tag-size">38.3 MB</span>
           <span class="tag tag-free">FREE</span>
         </div>
-        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/MultiUploadPro_life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+        <button class="btn-dl" onclick="showDownload('https://github.com/lch76543-boop/chen-make/releases/download/v1.0/MultiUploadPro_life_Setup.exe','Multi Upload Pro')"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></button>
       </div>
     </div>
 
@@ -759,7 +876,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
           <span class="tag tag-size">77.6 MB</span>
           <span class="tag tag-free">FREE</span>
         </div>
-        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/AUTO_CHEN_REC_v1.1.life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+        <button class="btn-dl" onclick="showDownload('https://github.com/lch76543-boop/chen-make/releases/download/v1.0/AUTO_CHEN_REC_v1.1.life_Setup.exe','AUTO CHEN REC')"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></button>
       </div>
     </div>
 
@@ -779,7 +896,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
           <span class="tag tag-size">64.8 MB</span>
           <span class="tag tag-free">FREE</span>
         </div>
-        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/ChenRecorder_v1.2.life_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+        <button class="btn-dl" onclick="showDownload('https://github.com/lch76543-boop/chen-make/releases/download/v1.0/ChenRecorder_v1.2.life_Setup.exe','ChenRecorder')"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></button>
       </div>
     </div>
 
@@ -805,7 +922,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
           <span class="tag tag-size">69.7 MB</span>
           <span class="tag tag-free">FREE</span>
         </div>
-        <a href="https://github.com/lch76543-boop/chen-make/releases/download/v1.0/ChenZip_v1.1.1_Setup.exe" class="btn-dl"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></a>
+        <button class="btn-dl" onclick="showDownload('https://github.com/lch76543-boop/chen-make/releases/download/v1.0/ChenZip_v1.1.1_Setup.exe','ChenZip')"><svg width="14" height="14"><use href="#ico-dl"/></svg><span data-i18n="dl">다운로드</span></button>
       </div>
     </div>
 
@@ -847,6 +964,33 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
 
   </div>
 
+</div>
+
+<!-- ── DOWNLOAD MODAL ── -->
+<div class="modal-overlay" id="dlModal" hidden onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-icon">🛡️</div>
+    <div class="modal-title" data-i18n="modal_title">Windows 보안 알림 안내</div>
+    <div class="modal-prog" id="modal-prog-name"></div>
+    <p class="modal-desc" data-i18n="modal_desc">다운로드 후 실행 시 Windows SmartScreen 보안 경고창이 나타날 수 있습니다. 이는 코드 서명 인증서가 없는 무료 프로그램에서 발생하는 정상적인 현상이며, 악성 프로그램이 아닙니다.</p>
+    <div class="modal-steps">
+      <div class="modal-step">
+        <div class="step-num">1</div>
+        <div class="step-text" data-i18n="modal_step1">파란 경고창 하단의 <em>"추가 정보"</em> 를 클릭합니다</div>
+      </div>
+      <div class="modal-step">
+        <div class="step-num">2</div>
+        <div class="step-text" data-i18n="modal_step2">새로 나타나는 <em>"실행"</em> 버튼을 클릭하면 설치가 시작됩니다</div>
+      </div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-modal-cancel" onclick="closeModal()" data-i18n="modal_cancel">취소</button>
+      <button class="btn-modal-start" onclick="startDownload()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-i18n="modal_dl">다운로드 시작</span>
+      </button>
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -891,6 +1035,12 @@ const T = {
     up3_badge:    '커스터마이징',
     up4:          '네이버 블로그 자동화',
     up5:          '유튜브 롱폼 자동화',
+    modal_title:  'Windows 보안 알림 안내',
+    modal_desc:   '다운로드 후 실행 시 Windows SmartScreen 보안 경고창이 나타날 수 있습니다. 악성 소프트웨어가 아니며, 아래 두 단계를 따르면 정상 설치됩니다.',
+    modal_step1:  '파란 경고창 하단의 "추가 정보" 를 클릭합니다',
+    modal_step2:  '새로 나타나는 "실행" 버튼을 클릭하면 설치가 시작됩니다',
+    modal_cancel: '취소',
+    modal_dl:     '다운로드 시작',
   },
   en: {
     eyebrow:      '9 SOFTWARE AVAILABLE NOW',
@@ -927,6 +1077,12 @@ const T = {
     up3_badge:    'CUSTOM',
     up4:          'Naver Blog Automation',
     up5:          'YouTube Longform Automation',
+    modal_title:  'Windows Security Notice',
+    modal_desc:   'When running the downloaded file, a Windows SmartScreen warning may appear. This is not malware — follow these two steps to install normally.',
+    modal_step1:  'Click "More info" at the bottom of the blue warning screen',
+    modal_step2:  'Click the "Run anyway" button that appears to start installation',
+    modal_cancel: 'Cancel',
+    modal_dl:     'Start Download',
   }
 };
 
@@ -957,4 +1113,20 @@ function setLang(lang) {
   try { saved = localStorage.getItem('cp_lang') || 'ko'; } catch {}
   if (saved === 'en') setLang('en');
 })();
+
+let _dlUrl = '';
+function showDownload(url, name) {
+  _dlUrl = url;
+  document.getElementById('modal-prog-name').textContent = name;
+  document.getElementById('dlModal').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('dlModal').hidden = true;
+  document.body.style.overflow = '';
+}
+function startDownload() {
+  window.location.href = _dlUrl;
+  closeModal();
+}
 </script>
