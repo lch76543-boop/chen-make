@@ -967,7 +967,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
 </div>
 
 <!-- ── DOWNLOAD MODAL ── -->
-<div class="modal-overlay" id="dlModal" hidden onclick="if(event.target===this)closeModal()">
+<div class="modal-overlay" id="dlModal" style="display:none" onclick="if(event.target===this)closeModal()">
   <div class="modal-box">
     <div class="modal-icon">🛡️</div>
     <div class="modal-title" data-i18n="modal_title">Windows 보안 알림 안내</div>
@@ -1118,11 +1118,11 @@ let _dlUrl = '';
 function showDownload(url, name) {
   _dlUrl = url;
   document.getElementById('modal-prog-name').textContent = name;
-  document.getElementById('dlModal').hidden = false;
+  document.getElementById('dlModal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
 function closeModal() {
-  document.getElementById('dlModal').hidden = true;
+  document.getElementById('dlModal').style.display = 'none';
   document.body.style.overflow = '';
 }
 function startDownload() {
