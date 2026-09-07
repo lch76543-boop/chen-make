@@ -516,10 +516,13 @@ header {
   background: rgba(0,0,0,0.78);
   backdrop-filter: blur(8px);
   z-index: 999;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 20px;
+}
+.modal-overlay.is-open {
+  display: flex;
 }
 .modal-box {
   background: #0C0E1A;
@@ -967,7 +970,7 @@ footer { position:relative; z-index:1; margin-top:80px; padding:36px 28px; borde
 </div>
 
 <!-- ── DOWNLOAD MODAL ── -->
-<div class="modal-overlay" id="dlModal" style="display:none" onclick="if(event.target===this)closeModal()">
+<div class="modal-overlay" id="dlModal" onclick="if(event.target===this)closeModal()">
   <div class="modal-box">
     <div class="modal-icon">🛡️</div>
     <div class="modal-title" data-i18n="modal_title">Windows 보안 알림 안내</div>
@@ -1118,11 +1121,11 @@ let _dlUrl = '';
 function showDownload(url, name) {
   _dlUrl = url;
   document.getElementById('modal-prog-name').textContent = name;
-  document.getElementById('dlModal').style.display = 'flex';
+  document.getElementById('dlModal').classList.add('is-open');
   document.body.style.overflow = 'hidden';
 }
 function closeModal() {
-  document.getElementById('dlModal').style.display = 'none';
+  document.getElementById('dlModal').classList.remove('is-open');
   document.body.style.overflow = '';
 }
 function startDownload() {
